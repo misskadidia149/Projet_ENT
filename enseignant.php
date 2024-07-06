@@ -3,7 +3,7 @@ require'bd.php';
 ?>
 
 <div class="ecran">
-<a href="home.php?classe=1" class="btn btn-danger float-right">Retour</a><br><br><br>
+<a href="home.php?enseignant=1" class="btn btn-danger float-right">Retour</a><br><br><br>
 
 <div class="tableau">
                   <div class="card-body">
@@ -14,7 +14,7 @@ require'bd.php';
                     
                     <div class="card-header">
                         <h4>Details Enseignant
-                            <a href="home.php?classe=1" class="btn btn-primary float-end">Ajouter</a>
+                            <a href="home.php?ajouterEnseignant=1" class="btn btn-primary float-end">Ajouter</a>
                         </h4>
                     </div>
                     <div class="card-body"  >
@@ -46,9 +46,9 @@ require'bd.php';
                                             <td><?= $student['email']; ?></td>
 
                                             <td>
-                                                <a href="Enseignant.php?"
-                                                    class="btn btn-info btn-sm">Voir</a>
-                                                <a href=""
+                                                <!-- <a href="Enseignant.php?"
+                                                    class="btn btn-info btn-sm">Voir</a> -->
+                                                <a href="home.php?modifierEnseignant=1"
                                                     class="btn btn-success btn-sm">Modifier</a>
                                                     <form action="code.php" method="post" class="d-inline" >
                                                     <button type="submit" name="delete_student " method="POST"   class="btn btn-danger btn-sm" >Supprimer</button>

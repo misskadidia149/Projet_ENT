@@ -132,7 +132,14 @@ if (empty($_SESSION["identifier"])) {
                 if (isset($_GET["modifierClasse"])) {
                     include ("modifierClasse.php");
                 }
+                if (isset($_GET["modifierEnseignant"])) {
+                include ("modifierEnseignant.php");
+            }
+            if (isset($_GET["ajouterEnseignant"])) {
+                include ("ajouterEnseignant.php");
+            }
                 ?>
+        
             </div>
         </div>
     </div>

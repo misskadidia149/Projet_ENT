@@ -38,6 +38,27 @@ if(isset($_POST['update_studentC']))
         exit(0);
     }
 }
+if(isset($_POST['update_studentE']))
+{
+    $student_id=mysqli_real_escape_string($con,$_POST['student_id']);
+    $nom= mysqli_real_escape_string($con, $_POST['nom']);
+    $prenom= mysqli_real_escape_string($con, $_POST['prenom']);
+    $contact= mysqli_real_escape_string($con, $_POST['contact']);
+    $email= mysqli_real_escape_string($con, $_POST['email']);
+
+    $query="UPDATE enseignant SET nom='$nom', prenom='$prenom', contact='$contact', email='$email' WHERE id='$student_id' ";
+    $query_run=mysqli_query($con,$query);
+    if( $query_run){
+        $_SESSION['message']="Etudiant mis à jour avec succès";
+        header("Location: home.php?enseignant=1");
+        exit(0);
+    }
+    else{
+        $_SESSION['message']="Echec! ";
+        header("Location: home.php?classe=1");
+        exit(0);
+    }
+}
 
 if(isset($_POST['save_studentC'])){
     $nom= mysqli_real_escape_string($con, $_POST['nom']);
@@ -52,6 +73,22 @@ if(isset($_POST['save_studentC'])){
     {
         $_SESSION['message']="Etudiant enregistrer avec succès";
         header("Location: home.php?classe=1");
+        exit(0);
+    }
+}
+if(isset($_POST['save_studentE'])){
+    $nom= mysqli_real_escape_string($con, $_POST['nom']);
+    $prenom= mysqli_real_escape_string($con, $_POST['prenom']);
+    $contact= mysqli_real_escape_string($con, $_POST['year']);
+    $email= mysqli_real_escape_string($con, $_POST['email']);
+
+    $query="INSERT INTO enseignant (nom,prenom,contact,email) 
+    VALUES('$nom','$prenom','$contact','$email')";
+    $query_run=mysqli_query($con,$query);
+    if($query_run)
+    {
+        $_SESSION['message']="Etudiant enregistrer avec succès";
+        header("Location: home.php?anseignant=1");
         exit(0);
     }
 }
