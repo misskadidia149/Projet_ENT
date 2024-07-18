@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 25, 2024 at 02:29 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 14 juil. 2024 à 20:34
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ENT`
+-- Base de données : `ent`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Admin`
+-- Structure de la table `admin`
 --
 
-CREATE TABLE `Admin` (
+CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
@@ -37,16 +37,43 @@ CREATE TABLE `Admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Admin`
+-- Déchargement des données de la table `admin`
 --
 
-INSERT INTO `Admin` (`id`, `nom`, `prenom`, `contact`, `email`, `password`) VALUES
+INSERT INTO `admin` (`id`, `nom`, `prenom`, `contact`, `email`, `password`) VALUES
 (1, 'bah', 'ibrahim', 82071032, 'ba@gmail.com', '123');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enseignant`
+-- Structure de la table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `course_name` varchar(255) NOT NULL,
+  `course_code` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `course_publications`
+--
+
+CREATE TABLE `course_publications` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `publication_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `enseignant`
 --
 
 CREATE TABLE `enseignant` (
@@ -61,7 +88,7 @@ CREATE TABLE `enseignant` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiant`
+-- Structure de la table `etudiant`
 --
 
 CREATE TABLE `etudiant` (
@@ -76,7 +103,7 @@ CREATE TABLE `etudiant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `etudiant`
+-- Déchargement des données de la table `etudiant`
 --
 
 INSERT INTO `etudiant` (`id`, `matricule`, `nom`, `prenom`, `contact`, `email`, `numParent`, `password`) VALUES
@@ -88,7 +115,7 @@ INSERT INTO `etudiant` (`id`, `matricule`, `nom`, `prenom`, `contact`, `email`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parent`
+-- Structure de la table `parent`
 --
 
 CREATE TABLE `parent` (
@@ -101,68 +128,140 @@ CREATE TABLE `parent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `parent`
+-- Déchargement des données de la table `parent`
 --
 
 INSERT INTO `parent` (`id`, `nom`, `prenom`, `numParent`, `email`, `password`) VALUES
 (1, 'Ba', 'Abdoulaye', 76454119, 'abdoulaye@gmail.com', 'abdoul123'),
-(2, 'bah', 'ibrahim', 82071032, 'ba@gmail.com', '123');
+(2, 'bah', 'ibrahim', 82071032, 'ba@gmail.com', '123'),
+(3, 'Diarra', 'N\'doba', 0, 'dniblon223@gmail.com', ''),
+(4, 'Diarra', 'N\'doba', 0, 'docteur@gmail.com', ''),
+(5, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(6, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(7, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(8, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(9, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(10, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(11, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(12, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(13, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', ''),
+(14, 'Diarra', 'N\'doba', 71713102, 'dniblon223@gmail.com', '');
+
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Structure de la table `teachers`
+--
+
+CREATE TABLE `teachers` (
+  `id` int(11) NOT NULL,
+  `teacher_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `Admin`
+-- Index pour la table `admin`
 --
-ALTER TABLE `Admin`
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `enseignant`
+-- Index pour la table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `course_publications`
+--
+ALTER TABLE `course_publications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `course_id` (`course_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
+
+--
+-- Index pour la table `enseignant`
 --
 ALTER TABLE `enseignant`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `etudiant`
+-- Index pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `parent`
+-- Index pour la table `parent`
 --
 ALTER TABLE `parent`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Index pour la table `teachers`
+--
+ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `Admin`
+-- AUTO_INCREMENT pour la table `admin`
 --
-ALTER TABLE `Admin`
+ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `enseignant`
+-- AUTO_INCREMENT pour la table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `course_publications`
+--
+ALTER TABLE `course_publications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `enseignant`
 --
 ALTER TABLE `enseignant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `etudiant`
+-- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `parent`
+-- AUTO_INCREMENT pour la table `parent`
 --
 ALTER TABLE `parent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `teachers`
+--
+ALTER TABLE `teachers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `course_publications`
+--
+ALTER TABLE `course_publications`
+  ADD CONSTRAINT `course_publications_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  ADD CONSTRAINT `course_publications_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
